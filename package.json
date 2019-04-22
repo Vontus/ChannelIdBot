@@ -1,0 +1,50 @@
+{
+  "name": "channelidbot",
+  "version": "0.1.0",
+  "description": "I can help you getting ID's from channels, groups, users and other bots",
+  "scripts": {
+    "build": "tsc --project tsconfig.json",
+    "build:watch": "npm run build -- --watch",
+    "clean": "npm run clean:build && npm run clean:coverage",
+    "clean:build": "rimraf lib/",
+    "clean:coverage": "rimraf coverage/",
+    "coverage": "npm run test -- --coverage --coverageReporters=json text lcov html",
+    "coverage:open": "npm run coverage && opn ./coverage/index.html",
+    "dev": "concurrently \"npm run build:watch\" \"npm run start:watch:delay\"",
+    "lint": "tslint src/**/*.ts",
+    "start": "node -r dotenv/config lib/index.js",
+    "start:watch:delay": "npm run delay && npm run start:watch",
+    "start:watch": "nodemon -r dotenv/config lib/index.js --log",
+    "test": "jest --config jest.config.js",
+    "test:ci": "npm run test -- --ci --reporters=jest-junit --coverage --coverageReporters=html --coverageReporters=json --coverageReporters=cobertura"
+  },
+  "author": "vontus",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/debug": "^4.1.4",
+    "@types/jest": "^24.0.11",
+    "@types/node": "^10.14.5",
+    "@types/node-telegram-bot-api": "^0.30.4",
+    "concurrently": "^4.1.0",
+    "jest": "^24.7.1",
+    "jest-junit": "^6.3.0",
+    "nodemon": "^1.18.11",
+    "opn-cli": "^4.1.0",
+    "rimraf": "^2.6.3",
+    "ts-jest": "^24.0.2",
+    "ts-node": "^8.1.0",
+    "tslint": "^5.16.0",
+    "tslint-config-standard": "^8.0.1",
+    "tslint-eslint-rules": "^5.4.0",
+    "typescript": "^3.4.4"
+  },
+  "dependencies": {
+    "debug": "^4.1.1",
+    "dotenv": "^6.2.0",
+    "node-telegram-bot-api": "^0.30.0",
+    "possessive": "^2.0.0"
+  },
+  "jest-junit": {
+    "outputDirectory": "coverage"
+  }
+}
